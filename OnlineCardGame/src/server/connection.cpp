@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <string.h>
+#include <vector>
 #include "connection.h"
 #include "loger.h"
 int MAX_CLIENTS=20;
@@ -64,7 +65,7 @@ void listen_connections(int sock,char haslo[])
     pthread_t thread; 
     listen(sock, MAX_CLIENTS);
     pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-
+    std::vector<struct client_t*> clientList;
     do 
     {
         char trybGracza[2];
@@ -124,6 +125,11 @@ void listen_connections(int sock,char haslo[])
         	printf("Tryb gracza: %s\n",trybGracza);
             }
  	    pthread_mutex_unlock(&mutex);
+	    clientList.push_back(new_client);
+	    for(int i = 0; i < clientList.size(); i++)
+	    {
+	    	write(clientList.at(i)->socket,"TEST",4);
+	    }
        //login(new_client->socket,haslo, &mutex,new_client->nick);
        }
     } while(1);

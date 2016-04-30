@@ -132,12 +132,5 @@ void create_connection(int argc, char** argv, int& sock,char nick[])
         strcpy( trybGracza,"2" );
   write(sock,trybGracza,2);
   sleep(5);
-  while(1){
-  	if(( recv( sock, conn, 2, 0 ) ) <= 0 )
-  	{
-      		perror( "Blad recv\n" );
-        	exit(- 1 );
-     	}
-  }
 }
 
