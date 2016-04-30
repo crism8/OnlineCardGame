@@ -131,13 +131,15 @@ void create_connection(int argc, char** argv, int& sock,char nick[])
   if(trybGracza[0]!='1' && trybGracza[0]!='2')
         strcpy( trybGracza,"2" );
   write(sock,trybGracza,2);
-  sleep(5);
+  //sleep(5);
+  char test[1024];
   while(1){
-  	if(( recv( sock, conn, 2, 0 ) ) <= 0 )
+  	if(( recv( sock, test, sizeof( test ), 0 ) ) <= 0 )
   	{
-      		perror( "Blad recv\n" );
-        	exit(- 1 );
-     	}
+        	perror( "Blad recv\n" );
+        	exit( - 1 );
+  	}
+  	printf( "Server: %s ", test );
   }
 }
 

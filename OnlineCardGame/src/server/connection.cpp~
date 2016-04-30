@@ -125,12 +125,14 @@ void listen_connections(int sock,char haslo[])
         	printf("Tryb gracza: %s\n",trybGracza);
             }
  	    pthread_mutex_unlock(&mutex);
-	    clientList.push_back(new_client);
-	    write(clientList.at(0)->socket,"testujeWrite",12);
-	    for(int i = 0; i < clientList.size(); i++)
-	    {
-	    	write(clientList.at(i)->socket,"t",1);
-	    }
+	    //clientList.push_back(new_client);
+	    write(new_client->socket,"TEST1",5);
+	    //write(new_client->socket,"TEST",4);
+	    //write(new_client->socket,"TEST2",5);
+	    //for(int i = 0; i < clientList.size(); i++)
+	   // {
+	    //	write(clientList.at(i)->socket,"TEST",4);
+	    //}
        //login(new_client->socket,haslo, &mutex,new_client->nick);
        }
     } while(1);
