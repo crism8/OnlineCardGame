@@ -12,26 +12,26 @@ function p_myproto.dissector (buf, pkt, root)
  
   -- create subtree for myproto
   local subtree = root:add(p_myproto, buf(0))
--- do poprawy
+
     if (tcp_dst_f().value == 8888) then
 
-        local option = buf(0,1):uint()
+      	local option = buf(0,1):uint()
 
-        subtree:add(buf(0,1), "Option: " .. buf(0,1):uint())
-        subtree:add(buf(1,1), "Category: " .. buf(1,1):uint())
+        subtree:add(buf(0,buf:len()), "Nazwa uzytkownika: " .. buf(0,buf:len()):string())
+     --   subtree:add(buf(4,4), "haslo: " .. buf(4,4):string())
 
-        if (option == 2) then
-            subtree:add(buf(2,buf:len()-3), "Advert: " .. buf(2,buf:len()-3):string())
+        if (option == 1) then
+            subtree:add(buf(0,1), "1= gracz: " .. buf(0,1):uint())
         else
-            if (option == 4) then
-                subtree:add(buf(2,1), "Created ago: " .. buf(2,1):uint())
+           if (option == 2) then
+                subtree:add(buf(0,1), "2=Widz:" .. buf(0,1):uint())
             end
         end
 
-    else
-        subtree:add(buf(0,1), "Category: " .. buf(0,1):uint())
-        subtree:add(buf(1,8), "Created: " .. buf(1,8):le_int64())
-        subtree:add(buf(9,buf:len()-10), "Advert: " .. buf(9,buf:len()-10):string())
+    --else
+      --  subtree:add(buf(0,1), "Category: " .. buf(0,1):uint())
+      --  subtree:add(buf(1,8), "Created: " .. buf(1,8):string())
+     --   subtree:add(buf(9,buf:len()), "Advert: " .. buf(9,buf:len()-10):string())
     end
 
 end
