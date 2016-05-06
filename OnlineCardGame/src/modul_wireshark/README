@@ -1,0 +1,14 @@
+Dodawanie modułu do Wireshark:
+1. Instalujemy Wireshark (sudo apt-get install wireshark) :D
+2. Uruchamiamy terminal i idziemy do /usr/share/wireshark
+3. Sudo gedit init.lua
+4. Na końcu pliku dodajemy:
+MYPROTO_SCRIPT_PATH="/home/cristian/OnlineCardGame/OnlineCardGame/src/modul_wireshark/" 
+dofile(MYPROTO_SCRIPT_PATH.."myproto.lua")
+
+Pamiętamy żeby zmienić ścieżkę na odpowiednią ;)
+5. Wiersz ' if running_superuser then' zmieniamy na 'if false then'
+6. Zapisujemy zmiany i wychodzimy.
+7. Sudo wireshark
+8. Wybieramy śledzenie interfejsu lo
+9. MYPROTO to pakiety naszej aplikacji
