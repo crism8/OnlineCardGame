@@ -20,7 +20,7 @@ function p_myproto.dissector (buf, pkt, root)
         subtree:add(buf(0,1), "Option: " .. buf(0,1):uint())
         subtree:add(buf(1,1), "Category: " .. buf(1,1):uint())
 
-        if (option == 2) then
+        if (option == 3) then
             subtree:add(buf(2,buf:len()-3), "Advert: " .. buf(2,buf:len()-3):string())
         else
             if (option == 4) then
